@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/compat/router";
 import React, { useEffect, useRef, useState } from "react";
 import { io, Socket } from "socket.io-client";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 const socket = io('ws://localhost:3001/local', {
   autoConnect: false,
   auth: {
@@ -16,7 +16,9 @@ socket.connect();
 export default function Room() {
 
   // const router = useRouter();
-  const { roomId } = useParams();
+  const { roomId, param1 } = useParams();
+  const router = useRouter();
+  const query = router?.query
   socket.emit("join_room", roomId);
 
   const [inputValue, setInputValue] = useState("");
