@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import Link from "next/link";
+import { RoomProvider } from '../context/RoomContext';
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,6 +26,7 @@ export default function RootLayout ({
   children: React.ReactNode;
 }>) {
   return (
+    <RoomProvider>
     <html lang="en">
       <body
         className={ `${geistSans.variable} ${geistMono.variable} antialiased bg-gray-100 h-screen flex` }
@@ -48,9 +50,7 @@ export default function RootLayout ({
           </header>
 
           <div className="space-y-4">
-            <p>Welcome to the admin panel!</p>
             <div className="bg-gray-100 p-4 rounded shadow">
-              <h3 className="text-lg font-bold">ROOMS</h3>
               {children}
             </div>
           </div>
@@ -58,5 +58,6 @@ export default function RootLayout ({
 
       </body>
     </html >
+    </RoomProvider>
   );
 }
