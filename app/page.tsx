@@ -1,125 +1,39 @@
 "use client";
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-
+import { useRoom } from '../context/RoomContext';
 
 export default function Home() {
-  const [rooms, setRooms] = useState([{
-    id:"room1",
-    name: "Loom 1"
-  }, {
-    id:"room2",
-    name: "Room 2"
-  }, null]);
-
-  const params = {
-    param1: "Par1"
-  };
+  const { rooms } = useRoom();
   return (
     // grid
     // justify-items-center
-    <div className="grid-rows-[20px_1fr_20px] items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-      <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          { rooms.map((room, i) => {
+    <div className="grid-rows-[20px_1fr_20px] min-h-screen font-[family-name:var(--font-geist-sans)]">
+      <div className="flex flex-col md:flex-row gap-4">
+      { rooms.map((room, i) => {
             return (
-              room ? <li key={ i } className="border border-black"><Link href={{query: {"params":"asdas"}, pathname: `/room/${room.id}`}}>{room.name}</Link></li> : <li key={ i }>Add New Room (pending)</li>
+              room ?
+              <Link key={ i } href={{query: {"param1":"asdas"}, pathname: `/room/${room.id}`}}>
+                <div className="max-w-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-16 px-32 rounded">
+                    {room.name}
+                </div>
+              </Link> :
+                <div className="max-w-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-16 px-32 rounded" key={ i }>
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-6 h-6">
+                    <path d="M12 4.5v15m7.5-7.5h-15" />
+                  </svg>
+                </div>
             );
           }) }
-      </ol>
-        {/* <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        /> */}
-        {/* <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-           <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
 
-        </ol> */}
-
-        {/* <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div> */}
-      </main>
+      </div>
+      {/* <p>asdkasdsad</p>
+    <div className="flex w-full h-96">
+      <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop>
+        <source src="/../../../out/v.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div> */}
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        {/* <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a> */}
       </footer>
     </div>
   );
